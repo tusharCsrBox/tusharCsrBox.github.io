@@ -53,6 +53,19 @@
         background-repeat: no-repeat;
 
     }
+    @media (max-width: 767px) {
+        /* Styles for screens smaller than 768 pixels (typical mobile devices) */
+        .swal2-popup {
+          /* Customize styles for smaller screens */
+          width: 80%;
+        }
+        
+        .swal2-image {
+          /* Customize image styles for smaller screens */
+          max-width: 100%;
+          height: auto;
+        }
+      }
 </style>
 <body class="light">
     <!-- Start Preloader -->
@@ -975,7 +988,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         window.onload = function() {
-          // Trigger SweetAlert2 on page load
+            // Trigger SweetAlert2 on page load
             Swal.fire({
                 imageUrl: "/assets/images/hero/ibmAdv.jpg",
                 imageHeight: 400,
@@ -989,12 +1002,11 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.open('https://bit.ly/selfregCSRBOX', '_blank');
-                }else{
-                    close
-                } 
-                
+                }
+                // If the user clicks the cancel button, do nothing
             });
         };
+        
       </script>
 </body>
 
