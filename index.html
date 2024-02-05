@@ -11,6 +11,28 @@
     <meta name="author" content="TechWithJoshi" />
     <!-- Title  -->
     <title>CSRBOX | IBM-SkillBuild Platform</title>
+    <!-- <script>
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function (e) {
+          e.preventDefault();
+        });
+    
+        // Disable F12 key
+        document.onkeydown = function (e) {
+          if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+            e.preventDefault();
+          }
+        };
+    
+        // Check if the devtools are open when the window loses focus
+        window.onblur = function () {
+          if (document.hasFocus()) return;
+          if (window.innerWidth - document.documentElement.clientWidth > 1 ||
+              window.innerHeight - document.documentElement.clientHeight > 1) {
+            document.body.innerHTML = "<h1>Oopss!!! Caught You 😡 <br> Ahhh!! Dont try To Cheat the Website 😡</h1>";
+          }
+        };
+      </script> -->
     <!-- Favicon -->
     <link rel="shortcut icon" href="/assets/img/favicon.ico" />
     <!-- Google Fonts -->
@@ -35,7 +57,7 @@
     <link rel="stylesheet" href="/css/css-home/plugins/slick-theme.css" />
     <!-- Swiper Css -->
     <link rel="stylesheet" href="/css/css-home/plugins/swiper.css" />
-    <!-- Helper Css -->
+    <!-- Helper Css --> 
     <link rel="stylesheet" href="/css/css-home/plugins/helper.css" />
     <!-- Main Style Css -->
     <link rel="stylesheet" href="/css/css-home/style.css" />
@@ -65,6 +87,10 @@
           max-width: 100%;
           height: auto;
         }
+      }
+
+      .disable-message {
+        display: none;
       }
 </style>
 <body class="light">
