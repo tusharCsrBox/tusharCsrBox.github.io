@@ -6,7 +6,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="CSRBOX IBM skillbuildlogo CSRBOX">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script>
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
 
+    // Disable F12 key
+    document.onkeydown = function (e) {
+        const isCtrlS = (e.ctrlKey && e.key === 's');
+        const isCtrlU = (e.ctrlKey && e.key === 'u');
+        const isF12 = (e.key === 'F12');
+        const isCmdAltI = (e.metaKey && e.altKey && e.keyCode === 73);
+        const isCmdAltJ = (e.metaKey && e.altKey && e.keyCode === 74);
+        const isCmdAltC = (e.metaKey && e.altKey && e.keyCode === 67);
+        const isCmdShiftC = (e.metaKey && e.shiftKey && e.keyCode === 67);
+        const isCtrlShiftI = (e.ctrlKey && e.shiftKey && e.keyCode === 73);
+        const isCtrlShiftJ = (e.ctrlKey && e.shiftKey && e.keyCode === 74);
+        const isCtrlShiftC = (e.ctrlKey && e.shiftKey && e.keyCode === 67);
+        const isCmdAltU = (e.metaKey && e.altKey && e.keyCode === 85);
+        const isCtrlUOnly = (e.ctrlKey && e.keyCode === 85);
+    
+        if (isCtrlS || isCtrlU || isF12 || isCmdAltI || isCmdAltJ || isCmdAltC || isCmdShiftC ||
+            isCtrlShiftI || isCtrlShiftJ || isCtrlShiftC || isCmdAltU || isCtrlUOnly) {
+            e.preventDefault();
+        }
+    };
+
+    // Check if the devtools are open when the window loses focus
+    let workerUrl = 'data:application/javascript;base64,' + btoa(`
+        self.addEventListener('message', (e) => {
+            if(e.data==='hello'){
+                self.postMessage('hello');
+            }
+            debugger;
+            self.postMessage('');
+        });
+    `);
+
+    function checkIfDebuggerEnabled() {
+        return new Promise((resolve) => {
+            let fulfilled = false;
+            let worker = new Worker(workerUrl);
+            worker.onmessage = (e) => {
+                let data = e.data;
+                if (data === 'hello') {
+                    setTimeout(() => {
+                        if (!fulfilled) {
+                            resolve(true);
+                            worker.terminate();
+                        }
+                    }, 1);
+                } else {
+                    fulfilled = true;
+                    resolve(false);
+                    worker.terminate();
+                }
+            };
+            worker.postMessage('hello');
+        });
+    }
+
+    checkIfDebuggerEnabled().then((result) => {
+        if (result) {
+            if (window.innerWidth - document.documentElement.clientWidth > 1 ||
+                window.innerHeight - document.documentElement.clientHeight > 1) {
+                document.body.innerHTML = "<h1>Oops!!! Something Went wrong</h1>";
+            }
+        }
+    });
+</script>
   <!-- fav icon -->
   <!-- <link rel="icon" href="/assets/images/fav-icon/fav-icon.png"> -->
 
